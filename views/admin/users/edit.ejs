@@ -1,0 +1,108 @@
+<div class="card">
+    <div class="card-header">
+        Edit User
+    </div>
+
+    <div class="card-body">
+        <form action="/admin/users/update/<%= user.id %>?_method=PUT" method="POST">
+            <input id="csrf" type="hidden" name="_csrf" value="<%= csrf %>">
+            <div class="form-group <% if(errors.name){ %> has-error <% } %>">
+                <label for="name">Name*</label>
+                <input type="text" id="name" name="name" class="form-control" value="<%=user.name %>" required>
+                <% if(typeof errors.name !="undefined" && errors.name) { %>
+                    <em class="text-danger">
+                        <%= errors.name %>
+                    </em>
+                    <% } %>
+                        <p class="helper-block text-info">
+                            Put Name Here
+                        </p>
+            </div>
+            <div class="form-group <% if(errors.email){ %> has-error <% } %>">
+                <label for="email">Email*</label>
+                <input type="email" id="email" name="email" class="form-control" value="<%=user.email%>" required>
+                <% if(typeof errors.email !="undefined" && errors.email) { %>
+                    <em class="text-danger">
+                        <%= errors.email %>
+                    </em>
+                    <% } %>
+
+                        <p class="helper-block text-info">
+                            Put Email Here
+                        </p>
+            </div>
+            <div class="form-group <% if(errors.password){ %> has-error <% } %>">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" class="form-control" value=""
+                    placeholder="<%= user.hashedPassword %> ">
+                <% if(typeof errors.password !="undefined" && errors.password) { %>
+                    <em class="text-danger">
+                        <%= errors.password %>
+                    </em>
+                    <% } %>
+
+                        <p class="helper-block text-info">
+                            Put New Password Here
+                        </p>
+            </div>
+            <div class="form-group <% if(errors.role){ %> has-error <% } %>">
+                <label for="role">Role*</label>
+                <select name="role" id="role" class="form-control select2" required>
+                    <% roles.forEach(function(role) { %>
+                        <option value="<%= role.id  %>" <% if( user.role.id.toString()===role.id.toString() ){ %>
+                            selected
+                            <% } %>
+                                >
+                                <%=role.title %>
+                        </option>
+                        <% }); %>
+                </select>
+
+                <% if(typeof errors.role !="undefined" && error.roles) { %>
+                    <em class="text-danger">
+                        <%= error.role %>
+                    </em>
+                    <% } %>
+
+                        <p class="helper-block text-info">
+                            Select Role
+                        </p>
+            </div>
+
+            <!-- <div class="form-group <% if(errors.institution){ %> has-error <% } %>" id="institutionGroup">
+
+                <label for="institution">Institution</label>
+                <select name="institution_id" id="institution" class="form-control select2">
+                    @foreach($institutions as $id => $institution)
+                    <option value="{{ $id }}" {{ (isset($user) && $user->institution ? $user->institution->id :
+                        old('institution_id')) == $id ? 'selected' : '' }}>{{ $institution }}</option>
+                    @endforeach
+                </select>
+
+
+                <% if(typeof errors.institution !="undefined" && errors.institution) { %>
+                    <em class="text-danger">
+                        <%= errors.institution %>
+                    </em>
+                    <% } %>
+            </div> -->
+
+            <div>
+                <input class="btn btn-danger" type="submit" value="save">
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<script>
+    // $(document).ready(function () {
+    //     $('#roles').change(function () {
+    //         if ($("#roles option:selected:contains('Institution')").val())
+    //             $("#institutionGroup:hidden").show(150);
+    //         else
+    //             $("#institutionGroup:visible").hide(150);
+    //     });
+    // });
+</script>
+<%- contentFor('style') %>

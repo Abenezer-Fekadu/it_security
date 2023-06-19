@@ -1,0 +1,90 @@
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Register</div>
+                <div class="card-body">
+                    <form method="POST" action="/auth/register">
+                        <input id="csrf" type="hidden" name="_csrf" value="<%= csrf %>">
+                        <input id="isAdmin" type="hidden" name="isAdmin" value="false">
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
+                            <div class="col-md-6">
+                                <input id="name" type="text"
+                                    class="form-control <% if(errors.name){ %> is-invalid <% } %>" name="name"
+                                    placeholder="Name" required autocomplete="name" autofocus>
+                            </div>
+                            <% if(typeof errors.name !="undefined" && errors.name) { %>
+                                <span class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= errors.name %>
+                                </span>
+                                <% } %>
+                        </div>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email"
+                                    class="form-control <% if(errors.email){ %> is-invalid <% } %>" name="email"
+                                    placeholder="email" required autocomplete="Email">
+                            </div>
+                            <% if(typeof errors.email !="undefined" && errors.email) { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= errors.email %>
+                                </div>
+                                <% } %>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                            <div class="col-md-6">
+                                <input id="password" type="password"
+                                    class="form-control <% if(errors.password){ %> is-invalid <% } %>" name="password"
+                                    required autocomplete="new-password" placeholder="Password">
+                            </div>
+                            <% if(typeof errors.password !="undefined" && errors.password) { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= errors.password %>
+                                </div>
+                                <% } %>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Confirm
+                                Password</label>
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password"
+                                    class="form-control <% if(errors.password_confirmation){ %> is-invalid <% } %>"
+                                    name="password_confirmation" required autocomplete="new-password"
+                                    placeholder="Confirm Password">
+                            </div>
+                        </div>
+
+                        <% if(typeof errors.password_confirmation !="undefined" && errors.password_confirmation) { %>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <%= errors.password_confirmation %>
+                            </div>
+                            <% } %>
+
+                                <div class="row">
+                                    <div class="col-6 offset-md-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            Register
+                                        </button>
+                                    </div>
+                                    <div class="col-6 text-right">
+                                        <a class="btn btn-link px-0" href="/auth/login">
+                                            login
+                                        </a><br>
+                                    </div>
+                                </div>
+
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('style') %>

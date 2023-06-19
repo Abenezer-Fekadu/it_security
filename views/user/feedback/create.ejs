@@ -1,0 +1,58 @@
+<div class="card">
+    <div class="card-header">
+        Add Feedback
+    </div>
+
+    <div class="card-body">
+        <form id="uploadFeedback" action="/user/feedbacks?_csrf=<%= csrf %>" method="POST"
+            enctype="multipart/form-data">
+            <div class="form-group <% if(errors.name){ %> has-error <% } %>">
+                <label for="name">Full Name*</label>
+                <input type="text" id="name" name="name" class="form-control" value="<%= feedback.name  %>" required>
+
+                <em id="name_error" class="text-danger">
+                    <%= errors.name %>
+
+
+                </em>
+
+            </div>
+            <div class="form-group <% if(errors.email){ %> has-error <% } %>">
+                <label for="name">Email*</label>
+                <input type="text" id="email" name="email" class="form-control" value="<%= feedback.email  %>" required>
+
+                <em id="email_error" class="text-danger">
+                    <%= errors.email %>
+
+                </em>
+
+            </div>
+
+            <div class="form-group <% if(errors.comment){ %> has-error <% } %>">
+                <label for="description">Comment</label>
+                <textarea id="article-ckeditor" name="comment" class="form-control "
+                    required><%= feedback.comment %>  </textarea>
+
+                <em id="comment_error" class="text-danger">
+                    <%= errors.comment %>
+                </em>
+
+            </div>
+
+            <div class="form-group <% if(errors.file){ %> has-error <% } %>">
+                <label for="file">File</label>
+                <input name="file" type="file" accept="application/pdf" />
+                <em id="file_error" class="text-danger">
+                    <%= errors.file %>
+
+                </em>
+            </div>
+
+            <div>
+                <input class="btn btn-danger" type="submit" value="save">
+            </div>
+        </form>
+    </div>
+</div>
+
+<%- contentFor('style') %>

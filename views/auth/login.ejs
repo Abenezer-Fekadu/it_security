@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card mx-4">
+            <div class="card-body p-4">
+                <p class="text-muted">login</p>
+                <form action="/auth/login" method="POST">
+                    <input id="csrf" type="hidden" name="_csrf" value="<%= csrf %>">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <input required id="email" name="email" type="text"
+                            class="form-control <% if(errors.email){ %> is-invalid <% } %>" autocomplete="email"
+                            autofocus placeholder="email">
+                    </div>
+
+                    <% if(typeof errors.email !="undefined" && errors.email) { %>
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= errors.email %>
+                        </div>
+                        <% } %>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-lock"></i></span>
+                                </div>
+                                <input id="password" type="password"
+                                    class="form-control <% if(errors.password){ %> is-invalid <% } %>" name="password"
+                                    required autocomplete="new-password" placeholder="Password">
+
+                            </div>
+
+                            <% if(typeof errors.password !="undefined" && errors.password) { %>
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                    <%= errors.password %>
+                                </div>
+                                <% } %>
+
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <button type="submit" class="btn btn-primary px-4">
+                                                login
+                                            </button>
+                                        </div>
+                                        <div class="col-6 text-right">
+                                            <a class="btn btn-link px-0" href="/auth/register">
+                                                register
+                                            </a><br>
+                                        </div>
+                                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- contentFor('style') %>
